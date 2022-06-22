@@ -2,7 +2,7 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_restful import Api
 from config import Config
-from resources.api import LoginOut, User, jwt_blacklist
+from resources.api import Favorite, LoginOut, MovieList, Review, User, jwt_blacklist
 
 app=Flask(__name__)
 
@@ -25,6 +25,9 @@ api = Api(app)
 #경로(path)와 리소스(api코드)를 연결한다.
 api.add_resource(User, '/user')
 api.add_resource(LoginOut, '/login-out')
+api.add_resource(MovieList, '/movie')
+api.add_resource(Review, '/movie/review/<int:movie_id>')
+api.add_resource(Favorite, '/movie/favorite/<int:movie_id>')
 
 if __name__=='__main__':
     app.run()
