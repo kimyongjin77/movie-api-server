@@ -811,7 +811,6 @@ class RecommendRealTime(Resource):
 
             recomm_movieIds = similar_movies_list.iloc[0:top,0].to_list()
             #print(recomm_movieIds)
-            
             t = tuple(recomm_movieIds)
 
             query='''select count(b.movieId) review_cnt
@@ -835,6 +834,10 @@ class RecommendRealTime(Resource):
             result_list=cursor.fetchall()
             #print(result_list)
 
+            # #가져온 추천영화목록에 추천순서, 가중치를 merge 한다.
+            # #데이터프레임으로 변환한다.
+            # df_movies_list=pd.DataFrame(result_list)
+           
             return {"result":"success",
                     "count":len(result_list),
                     "items":result_list}, HTTPStatus.OK
